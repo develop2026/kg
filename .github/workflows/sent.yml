@@ -9,7 +9,7 @@ on:
       phone:
         description: "输入手机号"
         required: true
-        default: "${{ env.PAT }}"
+        default: ${{ env.PAT }}
 
 jobs:
   run:
