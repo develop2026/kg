@@ -26,9 +26,6 @@ async function login() {
         const result = await send(`/login/cellphone?mobile=${phone}&code=${code}`, "GET", {})
         if (result.status === 1) {
             console.log("登录成功！")
-            console.log("第一行是token,第二行是userid")
-            console.log(result.data.token)
-            console.log(result.data.userid)
             userinfo.push({
                 userid: result.data.userid,
                 token: result.data.token
