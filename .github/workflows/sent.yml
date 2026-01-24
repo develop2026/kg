@@ -4,11 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       phone:
-        env:
-          PAT: ${{ secrets.PAT }}
         description: "输入手机号"
         required: true
-        default: ${{ PAT }}
 
 jobs:
   run:
