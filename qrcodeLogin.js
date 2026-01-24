@@ -28,7 +28,16 @@ async function qrcode() {
                 console.log("二维码链接如下, 请在浏览器打开使用APP扫描并确认登录")
                 const imgUrl = await uploadToImgBB(img_base64);
                 if (imgUrl) {
-                console.log(imgUrl);
+                    console.log(imgUrl);
+                    execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
+                    execSync('git config --global user.name "github-actions[bot]"');
+                    execSync(`cat > README.md << 'EOF'${imgUrl}EOF`);
+                    execSync('git add -A');
+                    try {
+                        execSync('git commit -m "chore: 添加二维码URL [skip ci]"');
+                        execSync('git push --quiet --force-with-lease');
+                        console.log('✅ 已更新二维码, 请在仓库主页打开URL扫码登录');
+                    } catch (commitError) {}
                 } else {
                     const chunkSize = 1000;
                     for (let i = 0; i < img_base64.length; i += chunkSize) {
@@ -104,14 +113,14 @@ async function qrcode() {
         process.exit(0)
     }
 }
-
-async function uploadToImgBB(base64Data) {
+async function uploadToImgBB(base64Data, expirationSeconds = 120) {
     const apiKey = process.env.API;
     if (apiKey) {
         const cleanBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '');
         const formData = new FormData();
         formData.append('key', apiKey);
         formData.append('image', cleanBase64);
+        formData.append('expiration', expirationSeconds.toString());
         try {
             const response = await fetch('https://api.imgbb.com/1/upload', {
                 method: 'POST',
