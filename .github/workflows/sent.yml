@@ -6,8 +6,6 @@ on:
         description: "输入手机号"
         required: true
         type: number
-        max: 11
-        min: 11
 
 jobs:
   run:
