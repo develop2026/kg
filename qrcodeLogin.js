@@ -97,7 +97,7 @@ async function qrcode() {
             try {
                 execSync(`gh secret set USERINFO -b'${userinfoJSON}' --repo ${process.env.GITHUB_REPOSITORY}`);
                 console.log("secret <USERINFO> 更改成功")
-                const current = getBeijingDateTime();
+                const current = await getBeijingDateTime();
                 execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
                 execSync('git config --global user.name "github-actions[bot]"');
                 execSync(`echo "预计**${current.twoMonthsLater}**到期" > README.md`);
