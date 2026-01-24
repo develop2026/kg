@@ -97,6 +97,15 @@ async function qrcode() {
             try {
                 execSync(`gh secret set USERINFO -b'${userinfoJSON}' --repo ${process.env.GITHUB_REPOSITORY}`);
                 console.log("secret <USERINFO> 更改成功")
+                const current = getBeijingDateTime();
+                execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
+                execSync('git config --global user.name "github-actions[bot]"');
+                execSync(`echo "预计**${current.twoMonthsLater}**到期" > README.md`);
+                execSync('git add -A');
+                try {
+                    execSync('git commit -m "chore: 更新 [skip ci]"');
+                    execSync('git push --quiet --force-with-lease');
+                } catch (commitError) {}
             } catch (error) {
                 console.log("自动写入出错，登录信息如下，请手动添加到secret USERINFO")
                 console.log(userinfoJSON)
@@ -113,6 +122,25 @@ async function qrcode() {
         process.exit(0)
     }
 }
+
+async function getBeijingDateTime() {
+    const getBeijingTime = () => {
+        const now = new Date();
+        return new Date(now.getTime() + (8 * 60 * 60 * 1000));
+    };
+    const current = getBeijingTime();
+    const currentStr = `${current.getUTCFullYear()}-${(current.getUTCMonth() + 1).toString().padStart(2, '0')}-${current.getUTCDate().toString().padStart(2, '0')}`;
+    const future = new Date(current);
+    future.setUTCMonth(future.getUTCMonth() + 2);
+    const futureStr = `${future.getUTCFullYear()}-${(future.getUTCMonth() + 1).toString().padStart(2, '0')}-${future.getUTCDate().toString().padStart(2, '0')}`;
+    return {
+        currentBeijing: currentStr,
+        twoMonthsLater: futureStr,
+        currentDate: current,
+        futureDate: future
+    };
+}
+
 async function uploadToImgBB(base64Data, expirationSeconds = 120) {
     const apiKey = process.env.API;
     if (apiKey) {
