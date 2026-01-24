@@ -31,12 +31,12 @@ async function qrcode() {
                     console.log(imgUrl);
                     execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
                     execSync('git config --global user.name "github-actions[bot]"');
-                    execSync(`cat > README.md << 'EOF'${imgUrl}EOF`);
+                    execSync(`echo "${imgUrl}" > README.md`);
                     execSync('git add -A');
                     try {
                         execSync('git commit -m "chore: 添加二维码URL [skip ci]"');
                         execSync('git push --quiet --force-with-lease');
-                        console.log('✅ 已更新二维码, 请在仓库主页打开URL扫码登录');
+                        console.log('✅ 已更新二维码,请在仓库主页打开URL扫码登录');
                     } catch (commitError) {}
                 } else {
                     const chunkSize = 1000;
