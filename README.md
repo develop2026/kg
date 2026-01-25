@@ -14,8 +14,8 @@
 </details>
 
 <div align="center">
-  <a href="https://i.ibb.co/N2Gy2KRX/06a7d27b1c66.png" target="_blank">
-    <img src="https://i.ibb.co/N2Gy2KRX/06a7d27b1c66.png" alt="登录二维码" width="200"/>
+  <a href="https://i.ibb.co/jkRqF2Mt/a572e6f93e44.png" target="_blank">
+    <img src="https://i.ibb.co/jkRqF2Mt/a572e6f93e44.png" alt="登录二维码" width="200"/>
   </a>
   <br>
   <sub>请使用酷狗概念版扫码</sub>
