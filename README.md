@@ -14,7 +14,7 @@
 </details>
 
 <div align="center">
-  <img src="./src/5d68a1b21f4ebe19acbbd16d591481721001.png" alt="登录二维码" width="200"/>
+  <img src="https://i.ibb.co/HTH6g65b/7f2a5b5ce033.png" alt="登录二维码" width="200"/>
   <br>
   <sub>请使用酷狗概念版扫码</sub>
   <br>
