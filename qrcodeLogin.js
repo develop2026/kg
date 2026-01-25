@@ -31,6 +31,7 @@ async function qrcode() {
                     execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
                     execSync('git config --global user.name "github-actions[bot]"');
                     execSync(`sed -i 's|<img src="[^"]*" alt="登录二维码" width="200"\\/>|<img src="${imgUrl}" alt="登录二维码" width="200"\\/>|' README.md`);
+                    execSync(`sed -i 's|<a href="[^"]*" target="_blank">|<a href="${imgUrl}" target="_blank">|' README.md`);
                     execSync('git add -A');
                     try {
                         execSync('git commit -m "chore: 添加二维码URL [skip ci]"');
